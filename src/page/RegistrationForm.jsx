@@ -3,7 +3,6 @@ import Nav from './NavBar';
 import './index.css';
 
 const RegistrationForm = () => {
-    // State to manage form data
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -14,23 +13,42 @@ const RegistrationForm = () => {
         rodoAccepted: false,
     });
 
-    // Handle input changes
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
-        
-        // Use checked for checkboxes, otherwise use value
         const inputValue = type === 'checkbox' ? checked : value;
 
-        // Update form data
         setFormData({ ...formData, [name]: inputValue });
     };
 
-    // Handle form submission
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Add logic to process registration data here
-        console.log('Form Data:', formData);
-        // You can add code here to send the formData to the backend
+
+        try {
+            // Send registration data to the backend
+            const response = await fetch('your_backend_url/api/user/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                // Registration successful, get the bearer token from the response
+                const { token } = await response.json();
+
+                // Store the bearer token in local storage
+                localStorage.setItem('token', token);
+
+                // You can redirect the user to the home page or perform any other actions
+                console.log('Registration successful!');
+            } else {
+                // Handle registration error
+                console.error('Registration failed.');
+            }
+        } catch (error) {
+            console.error('Error during registration:', error);
+        }
     };
 
     return (
