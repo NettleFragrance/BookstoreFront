@@ -33,7 +33,7 @@ const Login = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    login: formData.username,
+                    login: formData.login,
                     password: formData.password,
                 }),
             });
