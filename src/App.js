@@ -10,8 +10,9 @@ import Main from './page/Main';
 import Login from './page/Login';
 import FavoriteAuthors from './page/FavoriteAuthors';
 
+
 function App() {
-    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('accessToken'));
+    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
 
     useEffect(() => {
         setIsLoggedIn(!!localStorage.getItem('accessToken'));
