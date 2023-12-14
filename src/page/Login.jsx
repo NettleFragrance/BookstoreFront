@@ -40,7 +40,7 @@ const Login = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                localStorage.setItem("accessToken", data.accessToken);
+                localStorage.setItem("token", data.token);
                 setSubmitted(true);
                 navigate("/UserData");
             } else if (response.status === 401) {
