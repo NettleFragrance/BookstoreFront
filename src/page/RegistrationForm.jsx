@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import Nav from './NavBar';
 import './index.css';
 
+import React, { useState } from 'react';
+import Nav from './NavBar';
+import './index.css';
+
 const RegistrationForm = () => {
     const [formData, setFormData] = useState({
         firstName: '',
@@ -24,13 +28,16 @@ const RegistrationForm = () => {
         e.preventDefault();
 
         try {
+            // Convert form data to URL-encoded format
+            const urlEncodedData = new URLSearchParams(formData).toString();
+
             // Send registration data to the backend
-            const response = await fetch('/api/user/register', {
+            const response = await fetch('your_backend_url/api/user/register', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: JSON.stringify(formData),
+                body: urlEncodedData,
             });
 
             if (response.ok) {
