@@ -59,7 +59,7 @@ const RegistrationForm = () => {
                 Login:
                 <input
                     type="text"
-                    name="firstloginName"
+                    name="login"
                     value={formData.login}
                     onChange={handleInputChange}
                 />
