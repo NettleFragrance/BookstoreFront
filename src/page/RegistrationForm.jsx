@@ -28,7 +28,7 @@ const RegistrationForm = () => {
             const urlEncodedData = new URLSearchParams(formData).toString();
 
             // Send registration data to the backend
-            const response = await fetch('your_backend_url/api/user/register', {
+            const response = await fetch('/api/user/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
