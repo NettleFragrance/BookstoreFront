@@ -3,6 +3,7 @@ import Nav from './NavBar';
 import './index.css';
 
 const RegistrationForm = () => {
+    // State to manage form data
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -13,23 +14,28 @@ const RegistrationForm = () => {
         rodoAccepted: false,
     });
 
+    // Handle input changes
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
         
-        // Jeśli element to checkbox, korzystaj z checked, w przeciwnym razie użyj value
+        // Use checked for checkboxes, otherwise use value
         const inputValue = type === 'checkbox' ? checked : value;
 
+        // Update form data
         setFormData({ ...formData, [name]: inputValue });
     };
 
+    // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Tutaj możesz dodać logikę do przetwarzania danych rejestracyjnych
+        // Add logic to process registration data here
         console.log('Form Data:', formData);
+        // You can add code here to send the formData to the backend
     };
 
     return (
         <form onSubmit={handleSubmit}>
+            {/* First Name */}
             <label>
                 First Name:
                 <input
@@ -40,6 +46,8 @@ const RegistrationForm = () => {
                 />
             </label>
             <br />
+
+            {/* Last Name */}
             <label>
                 Last Name:
                 <input
@@ -50,6 +58,8 @@ const RegistrationForm = () => {
                 />
             </label>
             <br />
+
+            {/* Email */}
             <label>
                 Email:
                 <input
@@ -60,6 +70,8 @@ const RegistrationForm = () => {
                 />
             </label>
             <br />
+
+            {/* Password */}
             <label>
                 Password:
                 <input
@@ -70,6 +82,8 @@ const RegistrationForm = () => {
                 />
             </label>
             <br />
+
+            {/* Birth Date */}
             <label>
                 Birth Date:
                 <input
@@ -80,6 +94,8 @@ const RegistrationForm = () => {
                 />
             </label>
             <br />
+
+            {/* Gender */}
             <label>
                 Gender:
                 <label>
@@ -102,6 +118,8 @@ const RegistrationForm = () => {
                 </label>
             </label>
             <br />
+
+            {/* RODO Checkbox */}
             <label>
                 <input
                     type="checkbox"
@@ -111,6 +129,8 @@ const RegistrationForm = () => {
                 /> I accept RODO terms
             </label>
             <br />
+
+            {/* Submit Button */}
             <button type="submit">Register</button>
         </form>
     );
