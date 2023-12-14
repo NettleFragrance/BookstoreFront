@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "/NavBar";
+import NavBar from "./NavBar";
+import './index.css';
 
 const Main = ({ isLoggedIn }) => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -39,8 +40,6 @@ const Main = ({ isLoggedIn }) => {
 
     return (
         <div>
-            <NavBar isLoggedIn={isLoggedIn} />
-
             <div>
                 <h2>Main Page</h2>
 

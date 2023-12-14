@@ -1,24 +1,25 @@
 import React from 'react';
-import NavBar from '/NavBar';
+import NavBar from './NavBar';
+import './index.css';
 
 const Order = ({ cart }) => {
     return (
         <div>
-            <NavBar />
-
             <div>
                 <h2>Order Page</h2>
-
-                {/* Display Cart Items */}
-                <ul>
-                    {cart.map((item, index) => (
-                        <li key={index}>
-                            <h3>{item.title}</h3>
-                            <p>Author: {item.author.name}</p>
-                            <p>Price: {item.price}</p>
-                        </li>
-                    ))}
-                </ul>
+                {cart ? (
+                    <ul>
+                        {cart.map((item, index) => (
+                            <li key={index}>
+                                <h3>{item.title}</h3>
+                                <p>Author: {item.author.name}</p>
+                                <p>Price: {item.price}</p>
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>Your cart is empty.</p>
+                )}
             </div>
         </div>
     );

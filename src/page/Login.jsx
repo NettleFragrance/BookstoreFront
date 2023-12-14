@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import Nav from '/NavBar';
+import { Link, useNavigate } from 'react-router-dom';
+import Nav from './NavBar';
+import './index.css';
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -11,7 +12,7 @@ const Login = () => {
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -39,7 +40,7 @@ const Login = () => {
                 const data = await response.json();
                 localStorage.setItem("accessToken", data.accessToken);
                 setSubmitted(true);
-                history.push("/UserData"); // Przekierowanie do widoku użytkownika po zalogowaniu
+                navigate("/UserData");
             } else {
                 setError(true);
             }
@@ -67,8 +68,6 @@ const Login = () => {
 
     return (
         <div>
-            <Nav />
-
             <div className="registration-form">
                 <div>
                     <h2>Login</h2>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import './NavBar.css';
 
 const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -18,19 +19,19 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
       <div className="nav-left">
         <Link to="/">
           <span>Main</span>
-          <img src="./img/home.png" alt="Main Icon" />
+          <img src="../img/home.png"/>
         </Link>
 
         <Link to="/Order">
           <span>Order</span>
-          <img src="./img/user.png" alt="Order Icon" />
+          <img src="../img/user.png"/>
         </Link>
 
         {isLoggedIn ? (
           <>
             <Link to="/Profile">
               <span>Profile</span>
-              <img src="./img/user.png" alt="Profile Icon" />
+              <img src="../img/user.png" />
             </Link>
 
             <button onClick={handleLogout}>Logout</button>

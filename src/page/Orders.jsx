@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "/NavBar";
+import NavBar from "./NavBar";
+import './index.css';
 
 function Orders() {
     const [transactions, setTransactions] = useState([]);
@@ -21,8 +22,6 @@ function Orders() {
 
     return (
         <div>
-            <NavBar />
-
             <div>
                 <h2>My Orders</h2>
 

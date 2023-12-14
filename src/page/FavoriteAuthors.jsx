@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "/NavBar";
+import NavBar from "./NavBar";
+import './index.css';
 
 function FavoriteAuthors() {
     const [authors, setAuthors] = useState([]);
@@ -40,8 +41,6 @@ function FavoriteAuthors() {
 
     return (
         <div>
-            <NavBar />
-
             <div>
                 <h2>Favorite Authors</h2>
 

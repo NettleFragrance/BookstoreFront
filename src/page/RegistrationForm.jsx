@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import Nav from '/NavBar';
+import Nav from './NavBar';
+import './index.css';
 
 const RegistrationForm = () => {
     const [formData, setFormData] = useState({
