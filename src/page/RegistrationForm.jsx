@@ -4,6 +4,7 @@ import './index.css';
 
 const RegistrationForm = () => {
     const [formData, setFormData] = useState({
+        login: '',
         firstName: '',
         lastName: '',
         password: '',
@@ -53,6 +54,17 @@ const RegistrationForm = () => {
 
     return (
         <form onSubmit={handleSubmit}>
+            {/* Login */}
+            <label>
+                Login:
+                <input
+                    type="text"
+                    name="firstloginName"
+                    value={formData.login}
+                    onChange={handleInputChange}
+                />
+            </label>
+            <br />
             {/* First Name */}
             <label>
                 First Name:
