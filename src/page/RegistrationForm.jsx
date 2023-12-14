@@ -24,16 +24,18 @@ const RegistrationForm = () => {
         e.preventDefault();
 
         try {
-            // Convert form data to URL-encoded format
-            const urlEncodedData = new URLSearchParams(formData).toString();
+            // Create a FormData object
+            const formDataObject = new FormData();
+
+            // Append each form field to the FormData object
+            Object.entries(formData).forEach(([key, value]) => {
+                formDataObject.append(key, value);
+            });
 
             // Send registration data to the backend
             const response = await fetch('/api/user/register', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: urlEncodedData,
+                body: formDataObject,
             });
 
             if (response.ok) {
