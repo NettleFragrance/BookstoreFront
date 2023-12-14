@@ -24,20 +24,12 @@ const RegistrationForm = () => {
         e.preventDefault();
     
         try {
-            // Create a URLSearchParams object
-            const urlSearchParams = new URLSearchParams();
-    
-            // Append each form field to the URLSearchParams object
-            Object.entries(formData).forEach(([key, value]) => {
-                urlSearchParams.append(key, value);
-            });
-    
             // Send registration data to the backend
             const response = await fetch('/api/user/register', {
                 method: 'POST',
-                body: urlSearchParams,
+                body: JSON.stringify(formData), // Send data as JSON
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Content-Type': 'application/json', // Set content type to JSON
                 },
             });
     
