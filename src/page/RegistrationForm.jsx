@@ -22,29 +22,32 @@ const RegistrationForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         try {
-            // Create a FormData object
-            const formDataObject = new FormData();
-
-            // Append each form field to the FormData object
+            // Create a URLSearchParams object
+            const urlSearchParams = new URLSearchParams();
+    
+            // Append each form field to the URLSearchParams object
             Object.entries(formData).forEach(([key, value]) => {
-                formDataObject.append(key, value);
+                urlSearchParams.append(key, value);
             });
-
+    
             // Send registration data to the backend
             const response = await fetch('/api/user/register', {
                 method: 'POST',
-                body: formDataObject,
+                body: urlSearchParams,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
             });
-
+    
             if (response.ok) {
                 // Registration successful, get the bearer token from the response
                 const { token } = await response.json();
-
+    
                 // Store the bearer token in local storage
                 localStorage.setItem('token', token);
-
+    
                 // You can redirect the user to the home page or perform any other actions
                 console.log('Registration successful!');
             } else {
