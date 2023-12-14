@@ -5,12 +5,12 @@ import './index.css';
 
 const Login = () => {
     const [formData, setFormData] = useState({
-        username: '',
-        password: '',
-        rodoAccepted: false,
+        login: '',
+        password: ''
     });
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
+    const [networkError, setNetworkError] = useState(false);
 
     const navigate = useNavigate();
 
@@ -19,6 +19,8 @@ const Login = () => {
         const inputValue = type === 'checkbox' ? checked : value;
         setFormData({ ...formData, [name]: inputValue });
         setSubmitted(false);
+        setError(false);
+        setNetworkError(false);
     };
 
     const handleSubmit = async (e) => {
@@ -41,12 +43,14 @@ const Login = () => {
                 localStorage.setItem("accessToken", data.accessToken);
                 setSubmitted(true);
                 navigate("/UserData");
-            } else {
+            } else if (response.status === 401) {
                 setError(true);
+            } else {
+                setNetworkError(true);
             }
         } catch (error) {
             console.error("Error during login:", error);
-            setError(true);
+            setNetworkError(true);
         }
     };
 
@@ -61,7 +65,15 @@ const Login = () => {
     const errorMessage = () => {
         return (
             <div className="error" style={{ display: error ? '' : 'none' }}>
-                <h3>Fill in all the gaps and accept RODO terms</h3>
+                <h3>Invalid username or password. Please try again.</h3>
+            </div>
+        );
+    };
+
+    const networkErrorMessage = () => {
+        return (
+            <div className="error" style={{ display: networkError ? '' : 'none' }}>
+                <h3>Network error. Please try again later.</h3>
             </div>
         );
     };
@@ -75,17 +87,18 @@ const Login = () => {
 
                 <div className="messages">
                     {errorMessage()}
+                    {networkErrorMessage()}
                     {successMessage()}
                 </div>
 
                 <form>
-                    <label className="label">Username</label>
+                    <label className="label">Login</label>
                     <input
                         onChange={handleInputChange}
                         className="input"
-                        value={formData.username}
+                        value={formData.login}
                         type="text"
-                        name="username"
+                        name="login"
                     />
 
                     <label className="label">Password</label>
@@ -96,16 +109,6 @@ const Login = () => {
                         type="password"
                         name="password"
                     />
-
-                    <label>
-                        <input
-                            type="checkbox"
-                            name="rodoAccepted"
-                            checked={formData.rodoAccepted}
-                            onChange={handleInputChange}
-                        /> I accept RODO terms
-                    </label>
-
                     <button onClick={handleSubmit} className="btn" type="submit">
                         Log in
                     </button>
