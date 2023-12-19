@@ -13,7 +13,10 @@ function Orders() {
 
     const fetchTransactions = async () => {
         try {
-            const response = await fetch(globals.get("backend") + '/transaction/');
+            const response = await fetch(globals.get("backend") + '/transaction/', {
+							method: "GET",
+							headers: {"Authorization": `Bearer ${token}`}
+						);
             const data = await response.json();
             setTransactions(data);
         } catch (error) {
