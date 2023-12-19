@@ -8,7 +8,7 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
 
   const handleLogout = () => {
     // Usunięcie tokena z localStorage
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem('token');
     // Ustawienie stanu zalogowania na false
     setIsLoggedIn(false);
     // Przekierowanie użytkownika na stronę główną

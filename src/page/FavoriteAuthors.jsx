@@ -14,7 +14,7 @@ function FavoriteAuthors() {
 
     const fetchAuthors = async () => {
         try {
-            const response = await fetch(globals.get("backend") + '/author/');
+            const response = await fetch(globals.get("backend") + '/director');
             const data = await response.json();
             setAuthors(data);
         } catch (error) {
@@ -25,7 +25,7 @@ function FavoriteAuthors() {
     const handleFavoriteAuthor = async (authorId) => {
         try {
             // Wyślij zapytanie PATCH, aby oznaczyć autora jako ulubionego
-            const response = await fetch(`/api/author/${authorId}?favorite=true`, {
+            const response = await fetch(globals.get("backend") + `/director/${authorId}?favorite=true`, {
                 method: 'PATCH',
             });
 
@@ -49,9 +49,7 @@ function FavoriteAuthors() {
                 <ul>
                     {authors.map((author) => (
                         <li key={author.id}>
-                            <h3>{author.name}</h3>
-                            <p>Country: {author.country}</p>
-                            <p>Birth Date: {author.birthDate}</p>
+                            <h3>{author.displayedName}</h3>
                             <button
                                 onClick={() => handleFavoriteAuthor(author.id)}
                                 disabled={favoriteAuthors.includes(author.id)}

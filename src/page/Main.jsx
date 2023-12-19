@@ -14,7 +14,7 @@ const Main = ({ isLoggedIn }) => {
 
     const fetchMovies = async () => {
         try {
-            const response = await fetch('/api/movie/');
+            const response = await fetch(globals.get("backend") + '/movie/');
             const data = await response.json();
             setMovies(data);
         } catch (error) {
@@ -37,18 +37,19 @@ const Main = ({ isLoggedIn }) => {
         try {
             // Tworzenie obiektu JSON zawierającego id filmu i ilość
             const cartItem = {
-                movieId: movie.id,
-                quantity: 1, // Możesz dostosować ilość według własnych potrzeb
+                movieId: String(movie.id),
+                quantity: String(1), // Możesz dostosować ilość według własnych potrzeb
             };
 
             // Dodaj film do koszyka lokalnego
             setCart([...cart, cartItem]);
 
             // Wysyłanie obiektu JSON do endpointu /addtotransaction
-            await fetch('/addtotransaction', {
+            await fetch(globals.get("backend") + '/transaction/addtotransaction', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+										"Authorization": `Bearer ${localStorage.getItem("token")}`
                 },
                 body: JSON.stringify(cartItem),
             });
@@ -81,10 +82,10 @@ const Main = ({ isLoggedIn }) => {
                     {movies.map((movie) => (
                         <li key={movie.id}>
                             <h3>{movie.title}</h3>
-                            <p>Director: {movie.author.name}</p>
+                            <p>Director: {movie.director.name}</p>
                             <p>Release Date: {movie.releaseDate}</p>
                             <p>Categories: {movie.categories.map(category => category.name).join(', ')}</p>
-                            {isLoggedIn && <button onClick={() => handleAddToCart(movie)}>Add to Cart</button>}
+                            {!!localStorage.getItem('token') && <button onClick={() => handleAddToCart(movie)}>Add to Cart</button>}
                         </li>
                     ))}
                 </ul>
