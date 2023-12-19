@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import './index.css';
+import globals from '../globals'
 
 function Orders() {
     const [transactions, setTransactions] = useState([]);
@@ -12,7 +13,7 @@ function Orders() {
 
     const fetchTransactions = async () => {
         try {
-            const response = await fetch('/api/transaction/');
+            const response = await fetch(globals.get("backend") + '/transaction/');
             const data = await response.json();
             setTransactions(data);
         } catch (error) {

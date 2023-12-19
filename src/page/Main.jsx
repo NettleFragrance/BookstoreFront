@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import './index.css';
+import globals from '../globals'
 
 const Main = ({ isLoggedIn }) => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -25,7 +26,7 @@ const Main = ({ isLoggedIn }) => {
     const handleSearch = async () => {
         try {
             // Wyszukaj książki na podstawie searchTerm
-            const response = await fetch(`/api/book/?searchTerm=${searchTerm}`);
+            const response = await fetch(globals.get("backend") + `/book/?searchTerm=${searchTerm}`);
             const data = await response.json();
             setBooks(data);
         } catch (error) {

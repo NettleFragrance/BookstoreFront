@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from './NavBar';
 import './index.css';
+import globals from '../globals'
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
@@ -11,7 +12,7 @@ const Profile = () => {
     // Zaktualizuj stan komponentu setUserData(response.data) z danymi użytkownika
     // Przykład użycia fetch:
     const userId = 1; // Zastąp odpowiednim identyfikatorem zalogowanego użytkownika
-    fetch(`/api/user/${userId}`)
+    fetch(globals.get("backend") + `/user/${userId}`)
       .then(response => response.json())
       .then(data => setUserData(data))
       .catch(error => console.error('Error fetching user data:', error));

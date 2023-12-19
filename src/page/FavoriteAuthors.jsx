@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import './index.css';
+import globals from '../globals'
 
 function FavoriteAuthors() {
     const [authors, setAuthors] = useState([]);
@@ -13,7 +14,7 @@ function FavoriteAuthors() {
 
     const fetchAuthors = async () => {
         try {
-            const response = await fetch('/api/author/');
+            const response = await fetch(globals.get("backend") + '/author/');
             const data = await response.json();
             setAuthors(data);
         } catch (error) {

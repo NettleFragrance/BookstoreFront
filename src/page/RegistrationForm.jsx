@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Nav from './NavBar';
 import './index.css';
+import globals from '../globals'
 
 const RegistrationForm = () => {
     const [formData, setFormData] = useState({
@@ -26,7 +27,7 @@ const RegistrationForm = () => {
     
         try {
             // Send registration data to the backend
-            const response = await fetch('/api/user/register', {
+            const response = await fetch(globals.get("backend") + '/user/register', {
                 method: 'POST',
                 body: JSON.stringify(formData), // Send data as JSON
                 headers: {

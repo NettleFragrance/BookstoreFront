@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './NavBar.css';
+import globals from '../globals'
 
 const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();

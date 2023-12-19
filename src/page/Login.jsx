@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Nav from './NavBar';
 import './index.css';
+import globals from '../globals'
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -27,7 +28,7 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch("/api/user/login", {
+            const response = await fetch(globals.get("backend") + "/user/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
