@@ -35,14 +35,13 @@ function Orders() {
                         <li key={transaction.id}>
                             <h3>Transaction ID: {transaction.id}</h3>
                             <p>Confirmed: {transaction.confirmed ? 'Yes' : 'No'}</p>
-                            <p>Transaction Date: {transaction.transactionDate}</p>
                             <p>Total Price: {transaction.totalPrice}</p>
 
                             {/* List of Transaction Elements */}
                             <ul>
                                 {transaction.transactionElements.map((element) => (
                                     <li key={element.id}>
-                                        <h4>{element.book.title}</h4>
+                                        <h4>{element.movie.title}</h4>
                                         <p>Quantity: {element.quantity}</p>
                                     </li>
                                 ))}
