@@ -1,7 +1,5 @@
 import React from 'react';
-import NavBar from './NavBar';
 import './index.css';
-import globals from '../globals'
 
 const Order = ({ cart }) => {
     return (
