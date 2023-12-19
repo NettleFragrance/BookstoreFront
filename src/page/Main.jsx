@@ -4,7 +4,7 @@ import globals from '../globals'
 
 const Main = ({ isLoggedIn }) => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [books, setMovies] = useState([]);
+    const [movies, setMovies] = useState([]);
     const [cart, setCart] = useState([]);
 
     useEffect(() => {
@@ -27,21 +27,42 @@ const Main = ({ isLoggedIn }) => {
             // Wyszukaj filmy na podstawie searchTerm
             const response = await fetch(globals.get("backend") + `/movie/?searchTerm=${searchTerm}`);
             const data = await response.json();
-            setBooks(data);
+            setMovies(data);
         } catch (error) {
             console.error('Error searching movies:', error);
         }
     };
 
-    const handleAddToCart = (movie) => {
-        // Dodaj książkę do koszyka
-        setCart([...cart, movie]);
+    const handleAddToCart = async (movie) => {
+        try {
+            // Tworzenie obiektu JSON zawierającego id filmu i ilość
+            const cartItem = {
+                movieId: movie.id,
+                quantity: 1, // Możesz dostosować ilość według własnych potrzeb
+            };
+
+            // Dodaj film do koszyka lokalnego
+            setCart([...cart, cartItem]);
+
+            // Wysyłanie obiektu JSON do endpointu /addtotransaction
+            await fetch('/addtotransaction', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(cartItem),
+            });
+
+            console.log('Item added to transaction:', cartItem);
+        } catch (error) {
+            console.error('Error adding item to transaction:', error);
+        }
     };
 
     return (
         <div>
             <div>
-                <h2>Welcome to the movie store</h2>
+                <h2>Welcome to the movie store!</h2>
 
                 {/* Search Bar */}
                 <div>
