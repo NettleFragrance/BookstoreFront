@@ -15,8 +15,8 @@ function Orders() {
         try {
             const response = await fetch(globals.get("backend") + '/transaction/', {
 							method: "GET",
-							headers: {"Authorization": `Bearer ${token}`}
-						);
+							headers: {"Authorization": `Bearer ${localStorage.getItem("token")}`}
+						});
             const data = await response.json();
             setTransactions(data);
         } catch (error) {
